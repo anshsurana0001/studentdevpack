@@ -1,7 +1,7 @@
 {
   "name": "google-signin-clone",
   "version": "1.0.0",
-  "description": "Google Sign In Clone with Formbricks and EmailJS",
+  "description": "Google Sign In Clone with EmailJS",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "@emailjs/browser": "^3.11.0"
   },
   "browserslist": {
     "production": [
